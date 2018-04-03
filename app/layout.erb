@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Wedding Shenanigans</title>
+  </head>
+  <body>
+    <% if logged_in? %>
+       <a href="/lists/new"> Create List </a>
+       <br>
+       <a href="/logout"> Log-Out </a>
+       <br>
+       <p>Hello, <%=current_user.username %>!</p>
+     <%end %>
+
+      <h2><%= yield %></h2>
+
+
+  </body>
+</html>
