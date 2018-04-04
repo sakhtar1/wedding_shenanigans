@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 
   get "/login" do
     if !logged_in?
-		    erb :"users/sign_in"
+		    erb :"/login"
     else
       redirect '/lists'
     end
