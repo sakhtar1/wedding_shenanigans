@@ -2,7 +2,8 @@ class UsersController < ApplicationController
 
   get "/signup" do
     if !logged_in?
-		    erb :"users/sign_up"
+      return_message[:status] == 'Error::Please Sign Up to proceed'
+		   erb :"users/sign_up"
     else
       redirect '/users/show'
     end
@@ -10,6 +11,7 @@ class UsersController < ApplicationController
 
   post "/signup" do
     if params[:username].empty? || params[:email].empty? || params[:password].empty?
+      return_message[:status] == 'Error::Please Sign Up to proceed'
         redirect "/signup"
     else
       @user = User.create(:username => params[:username], :email => params[:email],:password => params[:password])
@@ -20,6 +22,7 @@ class UsersController < ApplicationController
 
   get "/login" do
     if !logged_in?
+      return_message[:status] == 'Error::Please Sign Up to proceed'
 		    erb :"users/sign_up"
     else
       redirect '/users/show'
