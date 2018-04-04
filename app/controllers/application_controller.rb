@@ -1,4 +1,4 @@
-require './config/environment'
+require_relative './config/environment'
 
 class ApplicationController < Sinatra::Base
   configure do
@@ -13,6 +13,11 @@ class ApplicationController < Sinatra::Base
   end
 
  helpers do
+    def not_logged_in?
+      if !logged_in?
+        redirect "/signup"
+      end
+    end
     def logged_in?
      !!current_user
     end
