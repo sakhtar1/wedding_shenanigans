@@ -11,7 +11,7 @@ gem 'shotgun'
 gem 'pry'
 gem 'bcrypt'
 gem "tux"
-
+gem "rack-flash3"
 gem 'simplecov'
 gem 'rspec'
 gem 'capybara'
