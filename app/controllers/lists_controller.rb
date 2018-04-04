@@ -11,7 +11,14 @@ class ListsController < ApplicationController
 
   get '/lists/new' do
     not_logged_in
-    redirect '/login'
+    redirect '/lists/new_list'
+  end
+
+  get '/tweets/:id' do
+    not_logged_in
+    @tweet = Tweet.find_by_id(params[:id])
+    erb :'lists/show_list'
+
   end
 
 end
