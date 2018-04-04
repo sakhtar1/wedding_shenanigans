@@ -1,29 +1,42 @@
 class ListsController < ApplicationController
 
   get '/lists' do
-      not_logged_in
+    if logged_in?
       @lists = List.all
       erb :'lists/lists'
+    else
+      redirect '/login'
+    end
   end
 
   get '/lists/new' do
-    not_logged_in
-    redirect '/lists/new_list'
+    if logged_in?
+      redirect '/lists/new_list'
+    else
+      redirect '/login'
+    end
+
   end
 
   get '/lists/:id' do
-    not_logged_in
-    @list = List.find_by_id(params[:id])
-    erb :'lists/show_list'
+    if logged_in?
+      @list = List.find_by_id(params[:id])
+      erb :'lists/show_list'
+    else
+      redirect '/login'
+    end
   end
 
   get '/lists/:id/edit' do
-    not_logged_in
-    @list = List.find_by_id(params[:id])
-    if @list && @list.user == current_user
-      erb :'lists/edit_list'
+    if logged_in?
+      @list = List.find_by_id(params[:id])
+      if @list && @list.user == current_user
+        erb :'lists/edit_list'
+      else
+        redirect '/lists'
+      end
     else
-      redirect '/lists'
+      redirect '/login'
     end
  end
 
