@@ -1,6 +1,7 @@
-<form action="/lists" method="post">
+<form action="/lists<%=@list.id%>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="PATCH">
   <label for="title">List Title:</label>
-  <input id="title" name="title" type="text">
+  <input id="title" name="title" type="text"value="<%=@list.content%>">
 
   <button type="submit">Add list</button>
 </form>
