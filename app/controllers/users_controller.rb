@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   get "/signup" do
     if !logged_in?
-		    erb :"users/create_user"
+		    erb :"users/sign_up"
     else
       redirect '/users/show'
     end
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
 
   get "/login" do
     if !logged_in?
-		    erb :"users/login"
+		    erb :"users/sign_up"
     else
       redirect '/users/show'
     end
@@ -46,7 +46,7 @@ class UsersController < ApplicationController
     if logged_in?
   		session.clear
       return_message[:status] == 'You are now logged out'
-  		redirect "/users/login"
+  		redirect "/users/sign_in"
     else
       redirect "/"
     end
