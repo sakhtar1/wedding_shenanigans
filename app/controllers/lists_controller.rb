@@ -43,7 +43,7 @@ class ListsController < ApplicationController
  post '/lists' do
   if logged_in?
     if params[:title].empty? && params[:item].empty?
-      redirect "/tweets/new"
+      redirect "/lists/new"
     else
       @user = User.find_by(id: session[:user_id])
       @list = List.create(title: params[:title], item: params[:item], user_id: @user.id)
