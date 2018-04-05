@@ -42,17 +42,42 @@ class ListsController < ApplicationController
 
  post '/lists' do
   if logged_in?
-    if params[:list][:title].empty? && params[:list][:item].empty?
+    if params[:list][:title].empty?
       redirect "/lists/new"
     else
-      @user = User.find_by(id: session[:user_id])
-      @list = List.create(title: params[:title], item: params[:item], user_id: @user.id)
-      redirect to "/lists"
+      @list = current_user.lists.create(title: params[:title], item: params[:item])
+      if @list.save
+        redirect to "/lists/#{@list.id}"
+      else
+        redirect to "/lists/new"
+      end
     end
-   else
+
+    else
     redirect '/login'
-   end
-end
+    end
+  end
+
+    patch '/lists/:id' do
+     if logged_in?
+      if params[:list][:title].empty?
+        redirect "/lists/#{params[:id]}/edit"
+      else
+        @list = List.find_by_id(params[:id])
+        if @list && @list.user = current_user
+          if @list.update(:title => params[:title], :item => params[:item])
+            redirect to "/lists/#{@list.id}"
+          else
+          redirect to "/lists/#{@list.id}/edit"
+          end
+        else
+          redirect to '/lists'
+        end
+      end
+    else
+      redirect '/login'
+    end
+  end
 
  delete '/lists/:id/delete' do
   if logged_in?
