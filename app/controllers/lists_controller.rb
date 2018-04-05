@@ -11,7 +11,7 @@ class ListsController < ApplicationController
 
   get '/lists/new' do
     if logged_in?
-      redirect '/lists/new_list'
+      erb :'/lists/new_list'
     else
       redirect '/login'
     end
