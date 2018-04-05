@@ -1,7 +1,7 @@
 <form action="/lists<%=@list.id%>" method="post">
   <input id="hidden" type="hidden" name="_method" value="PATCH">
   <label for="title">List Title:</label>
-  <input id="title" name="title" type="text"value="<%=@list.content%>">
+  <input id="list_title" name="list[title]" type="text"value="<%=@list.title%>">
 
   <button type="submit">Add list</button>
 </form>
@@ -12,7 +12,7 @@
   <input id="list_id" name="list_id" type="hidden" value="<%= @list.id() %>">
 
   <label for="description">Description:</label>
-  <input id="description" name="description" type="text">
+  <input id="item_description" name="item[description]" type="text"value="<%=@list.item%>">
 
   <button type="submit">Add item</button>
 </form>

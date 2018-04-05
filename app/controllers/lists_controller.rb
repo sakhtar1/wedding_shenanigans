@@ -40,6 +40,32 @@ class ListsController < ApplicationController
     end
  end
 
+ post '/lists' do
+  if logged_in?
+    if params[:title].empty? && params[:item].empty?
+      redirect "/tweets/new"
+    else
+      @user = User.find_by(id: session[:user_id])
+      @list = List.create(title: params[:title], item: params[:item], user_id: @user.id)
+      redirect to "/lists"
+    end
+   else
+    redirect '/login'
+   end
+end
+
+ delete '/lists/:id/delete' do
+  if logged_in?
+    @list = List.find_by_id(params[:id])
+    if @list && @list.user == current_user
+      @list.delete
+    end
+    redirect '/lists'
+  else
+    redirect '/login'
+  end
+end
+
 
 
 end
