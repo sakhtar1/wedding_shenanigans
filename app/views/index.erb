@@ -1,8 +1,12 @@
 <% if !logged_in? %>
-  <h3>Welcome to Wedding Shenanigans!!</h3> 
+  <p>Welcome to Wedding Shenanigans!!</p> 
 
   <p><a href="/signup">Sign-Up</a> to learn more!</p>
   <br>
   <br>
   <p>Have an account? <a href="/login"> Sign In </a></p>
+<%else %>
+  <p>We know weddings can be a bit crazy. That's why, Wedding Shenanigans is here to help you plan out your big-day with lists you can create.</p>
+  <p> To create a list click <a href="/lists/new">here</a>!</p>
+  <p> To view your lists click <a href="/lists/lists">here</a>!</p>
 <%end %>

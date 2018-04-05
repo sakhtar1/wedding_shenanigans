@@ -1,18 +1,26 @@
-
+  <h3> List Title</h3>
+  
 <form action="/lists" method="post">
-  <label for="title">List Title:</label>
+
+  <label for="title">Title:</label>
   <input id="list_title" name="list[title]" type="text">
 
-  <button type="submit">Add list</button>
-</form>
 
-<p> Add items:</p>
 
-<form action="/items" method="post">
-  <input id="list_id" name="list_id" type="hidden" value="<%= @list.id() %>">
+
+<h3> Add Items</h3>
+
+
 
   <label for="description">Description:</label>
   <input id="item_description" name="item[description]" type="text">
-
-  <button type="submit">Add item</button>
+  <input id="item_description" name="item[description]" type="text">
+  <input id="item_description" name="item[description]" type="text">
+  <input id="item_description" name="item[description]" type="text">
+  
+  <br>
+  <br>
+  
+  
+  <button type="submit">Add List</button>
 </form>
