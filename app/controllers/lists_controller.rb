@@ -42,19 +42,20 @@ class ListsController < ApplicationController
 
  post '/lists' do
   if logged_in?
-    if params[:list][:title].empty?
-      redirect "/lists/new"
-    else
-      @list = List.new(title: params[:title], item: params[:item])
+    if !params[:title] = ""
+      @user = User.find_by(id: session[:user_id])
+      @list = List.create(title: params[:title], item: params[:item], user_id: @user.id)
       if @list.save
         redirect to "/lists/#{@list.id}"
       else
         redirect to "/lists/new"
       end
+    else
+      redirect "/lists/new"
     end
-  else
-    redirect '/login'
-  end
+    else
+     redirect '/login'
+   end
  end
 
     patch '/lists/:id' do
