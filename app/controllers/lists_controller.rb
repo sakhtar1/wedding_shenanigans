@@ -68,7 +68,7 @@ class ListsController < ApplicationController
           if @list.update(:title => params[:title], :item => params[:item])
             redirect to "/lists/#{@list.id}"
           else
-          redirect to "/lists/#{@list.id}/edit"
+            redirect to "/lists/#{@list.id}/edit"
           end
         else
           redirect to '/lists'
