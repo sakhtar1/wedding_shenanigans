@@ -1,6 +1,8 @@
-<h3>Welcome to Wedding Shenanigans!!</h3>
+<% if !logged_in? %>
+  <h3>Welcome to Wedding Shenanigans!!</h3> 
 
-<a href="/signup">Sign-Up</a>
-<br>
-<br>
-<a href="/login"> Sign-In </a>
+  <p><a href="/signup">Sign-Up</a> to learn more!</p>
+  <br>
+  <br>
+  <p>Have an account? <a href="/login"> Sign In </a></p>
+<%end %>
