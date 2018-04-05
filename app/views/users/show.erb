@@ -1,6 +1,4 @@
-<h3> Hello, <%=@user.username %></h3>
-<p> We know weddings can be a bit crazy. </p>
-<p> That's why, Wedding Shenanigans is here to help you plan out your big-day with lists you can create.</p> 
+<h3> Hello, <%=@user.username %></h3> 
 <h4> Lists </h4>
 <p><% @lists.each do |list| %>
       <a href="/lists/<%=list.id%>"><%= list.title %>
