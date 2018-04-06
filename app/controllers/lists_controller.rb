@@ -15,8 +15,25 @@ class ListsController < ApplicationController
     else
       redirect '/login'
     end
-
   end
+
+    post '/lists' do
+    if logged_in?
+      if params[:title].empty?
+        redirect to "/lists/new"
+      else
+        @list = current_user.lists.build(title: params[:title], item: params[:item])
+        if @list.save
+          redirect to "/lists/#{@list.id}"
+        else
+          redirect to "/lists/new"
+        end
+      end
+    else
+      redirect to '/login'
+    end
+  end
+
 
   get '/lists/:id' do
     if logged_in?
@@ -40,28 +57,10 @@ class ListsController < ApplicationController
     end
  end
 
- post '/lists' do
-  if logged_in?
-    if !params[:title] = ""
-      @user = User.find_by(id: session[:user_id])
-      @list = List.create(title: params[:title], item: params[:item], user_id: @user.id)
-      if @list.save
-        redirect to "/lists/#{@list.id}"
-      else
-        redirect to "/lists/new"
-      end
-    else
-      redirect "/lists/new"
-    end
-    else
-     redirect '/login'
-   end
- end
-
     patch '/lists/:id' do
      if logged_in?
       if params[:list][:title].empty?
-        redirect "/lists/#{params[:id]}/edit"
+        redirect "/lists/#{@list.id}/edit"
       else
         @list = List.find_by_id(params[:id])
         if @list && @list.user = current_user
