@@ -1,30 +1,15 @@
-  <h3> List Title</h3>
 
-<form action="/lists" method="post">
+<h3> List Name</h3>
 
-  <label>Title:</label>
-  <br>
-  <input id="title" name="title" type="text">
+  <form action="/lists" method="post">
 
-<h3> Add Items</h3>
+    <p><label> Title: </p>
+    <input id="title" name="title" type="text">
 
-  <label>Description:</label>
-  <br>
-  <input id="item_1" type="text" name="item_1[][name]">
-  <br>
-  <br>
-  <input id="item_2" type="text" name="item_2[][name]">
-  <br>
-  <br>
-  <input id="item_3" type="text" name="item_3[][name]">
-  <br>
-  <br>
-  <input id="item_4" type="text" name="item_4[][name]">
+    <p><label> Description: </p>
+      <input id="description" type="text" name="description">
+      <br>
+      <br>
 
-  <br>
-  <br>
-
-  <button type="submit">Add List</button>
-</form>
-<br>
-<br>
+      <button type="submit">Add List</button>
+  </form>

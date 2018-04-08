@@ -1,7 +1,7 @@
 require './config/environment'
 
 class ApplicationController < Sinatra::Base
-  
+
   register Sinatra::ActiveRecordExtension
   configure do
      set :public_folder, 'public'
@@ -15,11 +15,12 @@ class ApplicationController < Sinatra::Base
   end
 
  helpers do
-    def not_logged_in?
+   def redirect_if_not_logged_in
       if !logged_in?
-        redirect "/signup"
+        redirect "/login?error=You have to be logged in to do that"
       end
     end
+    
     def logged_in?
      !!current_user
     end

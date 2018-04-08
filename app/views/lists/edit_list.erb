@@ -1,38 +1,16 @@
 
-  <h2> Update List</h2>
+<h3> Update List</h3>
 
-  <h3> Edit Title </h3>
   <form action="/lists/<%=@list.id%>" method="post">
     <input id="hidden" type="hidden" name="_method" value="PATCH">
 
-    <label for="title">Title: </label>
-    <input id="list_title" name="list[title]" type="text" value="<%=@list.title%>">
+    <p><label> Title: </p>
+    <input id="title" name="title" type="text" value="<%=@list.title%>">
 
-    <br>
-    <br>
-
-    <h3> Edit Items</h3>
-
-      <label>Description:</label>
-      <br>
-      <input id="item_1" type="text" name="item_1[][name]" value="<%=@list.item%>">
-      <br>
-      <br>
-      <input id="item_2" type="text" name="item_2[][name]" value="<%=@list.item%>">
-      <br>
-      <br>
-      <input id="item_3" type="text" name="item_3[][name]" value="<%=@list.item%>">
-      <br>
-      <br>
-      <input id="item_4" type="text" name="item_4[][name]" value="<%=@list.item%>">
-
+    <p><label> Edit Description: </p>
+      <input id="description" type="text" name="description" value="<%=@list.item%>">
       <br>
       <br>
 
       <button type="submit">Update List</button>
-    </form>
-    <br>
-    <br>
-
-
-</form>
+  </form>

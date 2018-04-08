@@ -2,8 +2,11 @@
 <html>
   <head>
     <title>Wedding Shenanigans</title>
+    <br>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   </head>
   <body>
+  <div class="container">
     <% if logged_in? %>
        <a href="/lists/new"> Create List </a>
        <br>
@@ -14,7 +17,11 @@
        <p>Hello, <%=current_user.username %>!</p>
      <%end %>
 
-      <h2><%= yield %></h2>
+   </div>
+    <div class="container">
+      <h1>Wedding Shenanigans</h1>
+      <%=yield%>
+    </div>
 
 
   </body>

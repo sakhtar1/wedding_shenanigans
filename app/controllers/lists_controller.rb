@@ -17,21 +17,13 @@ class ListsController < ApplicationController
     end
   end
 
-    post '/lists' do
-    if logged_in?
-      if params[:title].empty?
-        redirect to "/lists/new"
-      else
-        @list = current_user.lists.build(title: params[:title], item: params[:item])
-        if @list.save
-          redirect to "/lists/#{@list.id}"
-        else
-          redirect to "/lists/new"
-        end
-      end
-    else
-      redirect to '/login'
+  post "/lists" do
+    redirect_if_not_logged_in
+    unless !params[:title]== "" && !params[:item]==""
+      redirect "lists/new?error=invalid title or description"
     end
+    List.create(params)
+    redirect "/lists"
   end
 
 
