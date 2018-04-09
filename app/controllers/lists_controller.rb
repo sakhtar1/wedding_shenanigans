@@ -2,6 +2,7 @@ class ListsController < ApplicationController
 
   get '/lists' do
     if logged_in?
+      @user = User.find_by(id: session[:user_id])
       @lists = List.all
       erb :'lists/lists'
     else
@@ -19,18 +20,21 @@ class ListsController < ApplicationController
 
   post "/lists" do
     redirect_if_not_logged_in
-    unless !params[:title]== "" && !params[:item]==""
+    if params[:title]== "" && params[:item]==""
       redirect "lists/new?error=invalid title or description"
     end
-    List.create(params)
-    redirect "/lists"
+    @user = User.find_by(id: session[:user_id])
+    @list = List.create(title: params[:title], item: params[:item], user_id: @user.id)
+    redirect "/lists/#{@list.id}"
   end
 
 
   get '/lists/:id' do
     if logged_in?
       @list = List.find_by_id(params[:id])
-      erb :'lists/show_list'
+      if @list && @list.user == current_user
+        erb :'lists/show_list'
+      end
     else
       redirect '/login'
     end
@@ -49,26 +53,20 @@ class ListsController < ApplicationController
     end
  end
 
-    patch '/lists/:id' do
-     if logged_in?
-      if params[:list][:title].empty?
-        redirect "/lists/#{@list.id}/edit"
-      else
-        @list = List.find_by_id(params[:id])
-        if @list && @list.user = current_user
-          if @list.update(:title => params[:title], :item => params[:item])
-            redirect to "/lists/#{@list.id}"
-          else
-            redirect to "/lists/#{@list.id}/edit"
-          end
-        else
-          redirect to '/lists'
-        end
-      end
-    else
-      redirect '/login'
-    end
-  end
+ patch '/lists/:id' do
+   redirect_if_not_logged_in
+   if params[:title]=="" && params[:description]==""
+     redirect "/lists/#{@list.id}/edit?error=invalid title or description"
+   else
+     @list = List.find(params[:id])
+     if @list && @list.user == current_user
+       @list.update(params.select{|t|t=="title" || t=="item" || t=="user_id"})
+       redirect "/lists/#{@list.id}"
+     else
+       redirect to "/lists/#{@list.id}/edit?error=invalid title or description"
+     end
+   end
+ end
 
  delete '/lists/:id/delete' do
   if logged_in?

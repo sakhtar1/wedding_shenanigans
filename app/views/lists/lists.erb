@@ -1,4 +1,4 @@
 <h3>Lists</h3>
-<ol><% @lists.each do |list| %>
+<ol><% @user.lists.each do |list| %>
       <li><a href="/lists/<%=list.id%>"><%= list.title %></li>
     <%end%></ol>
